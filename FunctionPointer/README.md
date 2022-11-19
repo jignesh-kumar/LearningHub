@@ -13,7 +13,7 @@ int hoo(int x);
  
 // function pointer assignments
 int (*fcnPtr1)() = foo; // okay
-int (*fcnPtr2)() = goo; // wrong -- return types don't match!
+int (*fcnPtr2)() = goo; // wrong -- return types does not match!
 double (*fcnPtr4)() = goo; // okay
 fcnPtr1 = hoo; // wrong -- fcnPtr1 has no parameters, but hoo() does
 int (*fcnPtr3)(int) = hoo; // okay
@@ -36,19 +36,29 @@ In this case, as long as the user calls selectionSort normally (not through a fu
 
 Making function pointers prettier with typedef or type aliases:
 Let’s face it -- the syntax for pointers to functions is ugly. However, typedefs can be used to make pointers to functions look more like regular variables:
-```shtypedef bool (*validateFcn)(int, int);```
+```sh
+typedef bool (*validateFcn)(int, int);
+```
 
 This defines a typedef called “validateFcn” that is a pointer to a function that takes two ints and returns a bool.
 Now instead of doing this:
-```shbool validate(int x, int y, bool (*fcnPtr)(int, int)); // ugly```
+```sh
+bool validate(int x, int y, bool (*fcnPtr)(int, int)); // ugly
+```
 
 You can do this:
-```shbool validate(int x, int y, validateFcn pfcn) // clean```
+```sh
+bool validate(int x, int y, validateFcn pfcn) // clean
+```
 
 Which reads a lot nicer! However, the syntax to define the typedef itself can be difficult to remember.
 In C++11, you can instead use type aliases to create aliases for function pointers types:
-```shusing validateFcn = bool(*)(int, int); // type alias```
+```sh
+using validateFcn = bool(*)(int, int); // type alias
+```
 
 This reads more naturally than the equivalent typedef, since the name of the alias and the alias definition are placed on opposite sides of the equals sign.
 Using a type alias is identical to using a typedef:
-```shbool validate(int x, int y, validateFcn pfcn) // clean```
+```sh
+bool validate(int x, int y, validateFcn pfcn) // clean
+```
