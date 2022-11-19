@@ -1,17 +1,20 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
+[![Stargazers][stargazers-shield]][stargazers-url]
 [![Issues][issues-shield]][issues-url]
+[![Watchers][watchers-shield]][watchers-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-[contributors-shield]: https://img.shields.io/github/contributors/jignesh-kumar/jignesh-kumar.svg?style=for-the-badge
-[contributors-url]: https://github.com/jignesh-kumar/jignesh-kumar/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/jignesh-kumar/jignesh-kumar.svg?style=for-the-badge
-[forks-url]: https://github.com/jignesh-kumar/jignesh-kumar/network/members
-[stars-shield]: https://img.shields.io/github/stars/jignesh-kumar/jignesh-kumar.svg?style=for-the-badge
-[stars-url]: https://github.com/jignesh-kumar/jignesh-kumar/stargazers
-[issues-shield]: https://img.shields.io/github/issues/jignesh-kumar/jignesh-kumar.svg?style=for-the-badge
-[issues-url]: https://github.com/jignesh-kumar/jignesh-kumar/issues
+[contributors-shield]: https://img.shields.io/github/contributors/jignesh-kumar/LearningHub.svg?style=for-the-badge
+[contributors-url]: https://github.com/jignesh-kumar/LearningHub/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jignesh-kumar/LearningHub.svg?style=for-the-badge
+[forks-url]: https://github.com/jignesh-kumar/LearningHub/network/members
+[stargazers-shield]: https://img.shields.io/github/stars/jignesh-kumar/LearningHub.svg?style=for-the-badge
+[stargazers-url]: https://github.com/jignesh-kumar/LearningHub/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jignesh-kumar/LearningHub.svg?style=for-the-badge
+[issues-url]: https://github.com/jignesh-kumar/LearningHub/issues
+[watchers-shield]: https://img.shields.io/github/watchers/jignesh-kumar/LearningHub.svg?style=for-the-badge
+[watchers-url]: https://github.com/jignesh-kumar/LearningHub/watchers
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/jigneshkumar-vadaviya/
 
