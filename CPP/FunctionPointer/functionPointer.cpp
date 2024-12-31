@@ -8,7 +8,7 @@ void myFunction()
     cout << "This is myFunction" << endl;
 }
 
-void printName(char *data)
+void printName(const char *data)
 {
     cout << "The data is " << data << endl;
 }
@@ -76,7 +76,7 @@ int main()
     cout << "********************************** Example 2 ***************************************" << endl;
     {
         char myData[20];
-        void (*funcPtr)(char *data);
+        void (*funcPtr)(const char *data);
         funcPtr = printName;
 
         // Calling a function using a function pointer via implicit dereference
