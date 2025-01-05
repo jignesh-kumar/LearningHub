@@ -8,7 +8,10 @@ void myFunction()
     class LocalClass1
     {
     public:
-        LocalClass1() { cout << "LocalClass1::LocalClass1()" << endl; }
+        LocalClass1()
+        {
+            cout << "LocalClass1::LocalClass1()" << endl;
+        }
     };
 
     // Second Local class
@@ -18,7 +21,10 @@ void myFunction()
         LocalClass1 objLC1;
 
     public:
-        LocalClass2() { cout << "LocalClass2::LocalClass2()" << endl; }
+        LocalClass2()
+        {
+            cout << "LocalClass2::LocalClass2()" << endl;
+        }
         void mLocalClass2Function()
         {
             // Fine: Local class member mLocalClass2Function can access global variables.

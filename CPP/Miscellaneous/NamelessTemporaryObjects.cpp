@@ -21,7 +21,7 @@ public:
         count = 0;
     }
     // Parameterized Constructor
-    Sample(int i) : count (i){ };
+    Sample(int i) : count (i) { };
 
     // Operator Overloading function defination
     Sample operator++()
@@ -46,8 +46,7 @@ int main()
     int i = 0;
     Sample S1(100), S2;
 
-    for (i = 0; i < 5; i++)
-    {
+    for (i = 0; i < 5; i++) {
         S2 = ++S1;
 
         cout << "S1 :" << endl;
@@ -61,6 +60,6 @@ int main()
 
 /*
 In this program, we used nameless temporary object in overloaded member function.
-Here, we did not create any object inside the member function. 
+Here, we did not create any object inside the member function.
 We are just calling the constructor and returning incremented value to calling function.
 */

@@ -5,8 +5,7 @@ using namespace std;
 void myFunction()
 {
     static int x;
-    enum
-    {
+    enum {
         i = 1,
         j = 2
     };

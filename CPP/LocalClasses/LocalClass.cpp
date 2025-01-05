@@ -5,8 +5,8 @@ void myFunction()
 {
     class LocalClass    // This is Local class to myFunctoin
     {
-        public:
-            std::string name = "This is Local Class";
+    public:
+        std::string name = "This is Local Class";
     };
     LocalClass obj;
     LocalClass *ptr;
