@@ -1,4 +1,3 @@
-
 ### 1st Example of Class in Python
 class Store:
     def __init__(self):
