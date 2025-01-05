@@ -20,7 +20,16 @@ jobs:
 
       - name: Generate Version File
         run: |
-          git checkout -b update-version
+          BRANCH_NAME="update-version"
+          if git show-ref --verify --quiet refs/heads/$BRANCH_NAME; then 
+	          echo "Branch '$BRANCH_NAME' already exists. Checking it out and updating with 'main'." 
+	          git checkout $BRANCH_NAME 
+	          git pull origin main 
+          else
+	          echo "Branch '$BRANCH_NAME' does not exist. Creating a new branch." 
+	          git checkout -b $BRANCH_NAME 
+	          git pull origin main 
+          fi
           python3 .github/generate_version.py
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
