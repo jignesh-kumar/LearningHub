@@ -3,13 +3,21 @@ from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
 from conan.tools.build import can_run
 
+def read_version(): 
+   try: 
+      with open('version.txt', 'r') as file: 
+         version = file.read().strip() 
+         return version 
+   except FileNotFoundError: 
+      return "0.1" # Fallback version if version file is not found
+
 class AstragaramLibs(ConanFile):
    settings = "os", "compiler", "build_type", "arch"
    name = "LearningHub"
-   version = "1.0"
+   version = read_version()
 
    def build_requirements(self):
-      self.tool_requires("cmake/3.22.6")
+      self.tool_requires("cmake/3.30.5")
 
    def generate(self):
       tc = CMakeToolchain(self)

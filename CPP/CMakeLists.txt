@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.30)
 
 message(INFO " Current Source Directory: ${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_CXX_STANDARD 20)
