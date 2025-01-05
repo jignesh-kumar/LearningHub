@@ -38,8 +38,6 @@ jobs:
             git add version.txt
             git commit -m "Update base version and version file on PR merge"
             git push origin $BRANCH_NAME
-            git tag -a $(git rev-parse --short HEAD) -m "Version update after PR merge"
-            git push origin --tags
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
@@ -49,3 +47,25 @@ jobs:
           branch: ${{ env.BRANCH_NAME }}
           title: "Update base version and version file"
           body: "Automatically created pull request to update the base version and version file."
+
+  create-tag:
+    needs: update-version
+    if: ${{ github.event.pull_request.merged }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git user
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Create Git Tag
+        run: |
+          git fetch --all
+          git checkout main
+          latest_commit_hash=$(git rev-parse --short HEAD)
+          git tag -a "${latest_commit_hash}" -m "Version update after PR merge"
+          git push origin --tags
