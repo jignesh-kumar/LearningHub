@@ -33,7 +33,7 @@ jobs:
             python3 .github/generate_version.py
             git config --global user.name 'github-actions[bot]'
             git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-            git add version.txt base_version.txt
+            git add .github/version.txt .github/base_version.txt
             git commit -m "Update base version and version file on PR merge"
             git push origin update-version
             git tag -a $(git rev-parse --short HEAD) -m "Version update after PR merge"
