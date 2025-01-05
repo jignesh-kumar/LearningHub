@@ -37,8 +37,7 @@ bool descending(int x, int y)
 // This function prints out the values in the array
 void printArray(int *array, int size)
 {
-    for (int index = 0; index < size; ++index)
-    {
+    for (int index = 0; index < size; ++index) {
         cout << array[index] << " " ;
     }
 
@@ -48,17 +47,17 @@ void printArray(int *array, int size)
 // Note our user-defined comparison is the third parameter
 void selectionSort(int *array, int size, bool (*comparisonFcn)(int, int))
 {
-    for (int startIndex = 0; startIndex < size; ++startIndex)
-    {
+    for (int startIndex = 0; startIndex < size; ++startIndex) {
         // bestIndex is the index of the smallest/largest element we've encountered so far.
         int bestIndex = startIndex;
         // Look for smallest/largest element remaining in the array (starting at startIndex+1)
-        for (int currentIndex = startIndex + 1; currentIndex < size; ++currentIndex)
-        {
+        for (int currentIndex = startIndex + 1; currentIndex < size; ++currentIndex) {
             // If the current element is smaller/larger than our previously found smallest
             if (comparisonFcn(array[bestIndex], array[currentIndex])) // COMPARISON DONE HERE
                 // This is the new smallest/largest number for this iteration
+            {
                 bestIndex = currentIndex;
+            }
         }
         // Swap our start element with our smallest/largest element
         swap(array[startIndex], array[bestIndex]);
@@ -113,7 +112,7 @@ int main()
 
         cout << "Array Value is : ";
         printArray(array, 9);
-        
+
         // Sort the array in descending order using the descending() function
         selectionSort(array, 9, descending);
         cout << "Array Value after sort in descending : ";

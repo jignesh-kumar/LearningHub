@@ -4,19 +4,24 @@ using namespace std;
 
 void myFunction()
 {
-    int x;
+    int x = 42; // Initialize the variable
 
     // Local class
     class LocalClass
     {
     public:
+        LocalClass(int value) : x(value) {}
+
         void mLocalClassFunction()
         {
             cout << "x = " << x << endl;
         }
+
+    private:
+        int x; // Local copy of the variable
     };
 
-    LocalClass obj;
+    LocalClass obj(x); // Pass the variable to the constructor
     obj.mLocalClassFunction();
 }
 
