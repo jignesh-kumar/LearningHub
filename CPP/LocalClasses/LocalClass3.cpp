@@ -5,7 +5,7 @@ void fun()
 {
     class LocalClass // local to fun
     {
-        static int i;
+        // static int i;
     };
 }
 
