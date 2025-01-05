@@ -20,7 +20,7 @@ jobs:
 
       - name: Conditional version update
         run: |
-            BRANCH_NAME="update-version"
+            BRANCH_NAME="update-version-$(date +%s)"
             if git show-ref --verify --quiet refs/heads/$BRANCH_NAME; then 
                 echo "Branch '$BRANCH_NAME' already exists. Checking it out and updating with 'main'."
                 git checkout $BRANCH_NAME 
@@ -35,14 +35,15 @@ jobs:
             git config --global user.email 'github-actions[bot]@users.noreply.github.com'
             git add .github/version.txt .github/base_version.txt
             git commit -m "Update base version and version file on PR merge"
-            git push origin update-version
-            git tag -a $(git rev-parse --short HEAD) -m "Version update after PR merge"
-            git push origin --tags
+            git push origin $BRANCH_NAME
+            #git tag -a $(git rev-parse --short HEAD) -m "Version update after PR merge"
+            #git push origin --tags
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: update-version
+          base: main
+          branch: ${{ steps.conditional-version-update.outputs.BRANCH_NAME }}
           title: "Update base version and version file"
           body: "Automatically created pull request to update the base version and version file."
