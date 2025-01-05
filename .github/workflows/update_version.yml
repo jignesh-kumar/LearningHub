@@ -20,11 +20,18 @@ jobs:
 
       - name: Generate Version File
         run: |
-          pwd
-          ls
+          git checkout -b update-version
           python3 .github/generate_version.py
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .github/version.txt .github/base_version.txt
+          git add version.txt base_version.txt
           git commit -m "Update base version and version file on PR merge"
-          git push
+          git push origin update-version
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-version
+          title: "Update base version and version file"
+          body: "Automatically created pull request to update the base version and version file."
