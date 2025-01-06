@@ -1,10 +1,11 @@
 import subprocess
 import re
+import os
 
 # Function to get the latest tag
 def get_latest_tag():
-    result = subprocess.run(['git', 'describe', '--tags', subprocess.run(['git', 'rev-list', '--tags', '--max-count=1'], capture_output=True, text=True).stdout.strip()], capture_output=True, text=True)
-    return result.stdout.strip()
+    latest_tag = os.popen("git describe --tags `git rev-list --tags --max-count=1`").read().strip()
+    return latest_tag
 
 # Function to read the current version from the latest tag
 def read_current_version():
