@@ -4,8 +4,17 @@ import os
 
 # Function to get the latest tag
 def get_latest_tag():
-    latest_tag = os.popen("git describe --tags `git rev-list --tags --max-count=1`").read().strip()
-    return latest_tag
+    try:
+        latest_tag_command = "git describe --tags $(git rev-list --tags --max-count=1)"
+        latest_tag = os.popen(latest_tag_command).read().strip()
+        print(f"Latest tag command: {latest_tag_command}")
+        print(f"Latest tag result: {latest_tag}")
+        if not latest_tag:
+            return "0.0.0"  # Fallback version if no tags are found
+        return latest_tag
+    except Exception as e:
+        print(f"Error fetching latest tag: {e}")
+        return "0.0.0"  # Fallback version in case of an error
 
 # Function to read the current version from the latest tag
 def read_current_version():
