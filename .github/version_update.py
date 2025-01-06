@@ -20,6 +20,7 @@ def get_latest_tag():
             return "0.0.0"
         
         latest_tag_commit = os.popen("git rev-list --tags --max-count=1").read().strip()
+        print("latest_tag_commit:", latest_tag_commit)
         if not latest_tag_commit:
             print("No tags found in the repository.")
             return "0.0.0"
