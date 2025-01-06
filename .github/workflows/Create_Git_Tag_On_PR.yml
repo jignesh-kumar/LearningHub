@@ -13,15 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
       - name: Set up Git user
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Create Git Tag
+      - name: Run Version Update Script
         run: |
-          git fetch --all
-          git checkout main
-          latest_commit_hash=$(git rev-parse --short HEAD)
-          git tag -a "${latest_commit_hash}" -m "Git Tag created after PR merge"
-          git push origin --tags
+          python .github/version_update.py
