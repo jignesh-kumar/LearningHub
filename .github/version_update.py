@@ -9,6 +9,7 @@ def get_latest_tag():
 # Function to read the current version from the latest tag
 def read_current_version():
     latest_tag = get_latest_tag()
+    print(f"Current version is: {latest_tag}")
     if not latest_tag:
         return "0.0.0"
     return re.sub(r'\+.*$', '', latest_tag)  # Remove the commit hash part if it exists
