@@ -2,19 +2,39 @@ import subprocess
 import re
 import os
 
+# Function to get the current branch
+def get_current_branch():
+    try:
+        current_branch = os.popen("git rev-parse --abbrev-ref HEAD").read().strip()
+        print(f"Current branch: {current_branch}")
+        return current_branch
+    except Exception as e:
+        print(f"Error fetching current branch: {e}")
+        return None
+
 # Function to get the latest tag
 def get_latest_tag():
     try:
-        latest_tag_command = "git describe --tags $(git rev-list --tags --max-count=1)"
-        latest_tag = os.popen(latest_tag_command).read().strip()
-        print(f"Latest tag command: {latest_tag_command}")
+        current_branch = get_current_branch()
+        if not current_branch:
+            return "0.0.0"
+        
+        latest_tag_commit = os.popen("git rev-list --tags --max-count=1").read().strip()
+        if not latest_tag_commit:
+            print("No tags found in the repository.")
+            return "0.0.0"
+        
+        latest_tag = os.popen(f"git describe --tags {latest_tag_commit}").read().strip()
+        print(f"Latest tag commit: {latest_tag_commit}")
         print(f"Latest tag result: {latest_tag}")
+        
         if not latest_tag:
-            return "0.0.0"  # Fallback version if no tags are found
+            return "0.0.0"
+        
         return latest_tag
     except Exception as e:
         print(f"Error fetching latest tag: {e}")
-        return "0.0.0"  # Fallback version in case of an error
+        return "0.0.0"
 
 # Function to read the current version from the latest tag
 def read_current_version():
