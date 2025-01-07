@@ -12,19 +12,25 @@ def get_current_branch():
         print(f"Error fetching current branch: {e}")
         return None
 
+# Function to check if there are any tags in the repository
+def has_tags():
+    try:
+        tags = os.popen("git tag").read().strip()
+        if not tags:
+            return False
+        return True
+    except Exception as e:
+        print(f"Error checking for tags: {e}")
+        return False
+
 # Function to get the latest tag
 def get_latest_tag():
     try:
-        current_branch = get_current_branch()
-        if not current_branch:
-            return "0.0.0"
-        
-        latest_tag_commit = os.popen("git rev-list --tags --max-count=1").read().strip()
-        print("latest_tag_commit:", latest_tag_commit)
-        if not latest_tag_commit:
+        if not has_tags():
             print("No tags found in the repository.")
             return "0.0.0"
         
+        latest_tag_commit = os.popen("git rev-list --tags --max-count=1").read().strip()
         latest_tag = os.popen(f"git describe --tags {latest_tag_commit}").read().strip()
         print(f"Latest tag commit: {latest_tag_commit}")
         print(f"Latest tag result: {latest_tag}")
