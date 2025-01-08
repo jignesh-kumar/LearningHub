@@ -1,8 +1,17 @@
 #!/bin/bash
 
+# Define the full path to git if necessary
+GIT_CMD="/usr/bin/git"
+
 # Function to get the latest tag
 get_latest_tag() {
-  git describe --tags $(git rev-list --tags --max-count=1)
+    latest_tag_commit=$($GIT_CMD rev-list --tags --max-count=1)
+    if [[ -z "$latest_tag_commit" ]]; then
+        echo "0.0.0"
+        return
+    fi
+    latest_tag=$($GIT_CMD describe --tags "$latest_tag_commit")
+    echo "$latest_tag"
 }
 
 # Function to read the current version from the latest tag
@@ -39,7 +48,7 @@ increment_version() {
 }
 
 # Get the latest commit hash
-commit_hash=$(git rev-parse --short HEAD)
+commit_hash=$($GIT_CMD rev-parse --short HEAD)
 
 # Read the current version from the latest tag
 current_version=$(read_current_version)
@@ -47,7 +56,8 @@ echo "current_version: ${current_version}"
 
 # Determine the version type from the PR description (default to "Patch")
 version_type="Patch"
-pr_description=$(git log -1 --pretty=%B)
+pr_description=$($GIT_CMD log -1 --pretty=%B)
+
 if [[ "$pr_description" == *"[Major]"* ]]; then
   version_type="Major"
 elif [[ "$pr_description" == *"[Minor]"* ]]; then
@@ -63,8 +73,8 @@ new_version=$(increment_version "$current_version" "$version_type")
 full_version="${new_version}+${commit_hash}"
 
 # Create the new tag (uncomment the lines below to create and push the tag)
-git tag -a "$full_version" -m "Release version $full_version"
-git push origin "$full_version"
+$GIT_CMD tag -a "$full_version" -m "Release version $full_version"
+$GIT_CMD push origin "$full_version"
 
 # Output the new version
 echo "New version is: $full_version"
