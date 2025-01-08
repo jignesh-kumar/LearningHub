@@ -13,11 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
       - name: Set up Git user
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -25,4 +20,4 @@ jobs:
 
       - name: Run Version Update Script
         run: |
-          python .github/version_update.py
+          bash .github/version_update.sh

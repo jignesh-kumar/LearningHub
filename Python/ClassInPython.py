@@ -4,8 +4,10 @@ class Store:
         self.mProductName = "iPhone"
         self.mProductDescription = "This cellphone is aswome"
         self.mProductPrice = 5999
+
     def __del__(self):
         print("Invoking Destrucctor of Class Store!")
+
 
 Obj1 = Store()
 
@@ -20,8 +22,10 @@ class Device:
         self.mDeviceName = devicename
         self.mDeviceDescription = deviceDesc
         self.mDevicePrice = devicePrice
+
     def __del__(self):
         print("Invoking Destuctore class of Device!")
+
 
 Obj2 = Device("HeadPhone", "This aswome for Audio!", 3499)
 print(Obj2.mDeviceName)
@@ -34,21 +38,22 @@ class Movie:
     def __init__(self, movieName, movierating):
         self.mMovieName = movieName
         self.mMovieRating = movierating
-    
+
     def __del__(self):
         print("Invoking Destrctore of Class Movie!")
 
     def MovieRatings(self):
-        MovideRatingAvg = sum(self.mMovieRating)/len(self.mMovieRating)
+        MovideRatingAvg = sum(self.mMovieRating) / len(self.mMovieRating)
         print(f"Movie {self.mMovieName} Ratings is {MovideRatingAvg}")
 
-movie1 = Movie("Dev-D", [1,3,4,2,1])
+
+movie1 = Movie("Dev-D", [1, 3, 4, 2, 1])
 movie1.MovieRatings()
 
-movie1 = Movie("Krish", [4,3,4,5,5])
+movie1 = Movie("Krish", [4, 3, 4, 5, 5])
 movie1.MovieRatings()
 
-movie1 = Movie("Dhamaal", [1,3,3,2,2])
+movie1 = Movie("Dhamaal", [1, 3, 3, 2, 2])
 movie1.MovieRatings()
 movie1 = None
 
@@ -57,18 +62,25 @@ movie1 = None
 class Programmer:
     def __del__(self):
         print("Invoking desctore of class Programmer!")
+
     def SetProgrammerName(self, name):
         self.mProgrammerName = name
+
     def GetProgrammerName(self):
         return self.mProgrammerName
+
     def SetProgrammerSalary(self, sal):
         self.mProgrammerSalary = sal
+
     def GetProgrammerSalary(self):
         return self.mProgrammerSalary
+
     def SetProgrammerTechnoligies(self, techs):
         self.mProgrammerTechnoligies = techs
+
     def GetProgrammmerTecgnoligies(self):
         return self.mProgrammerTechnoligies
+
 
 progmer1 = Programmer()
 progmer1.SetProgrammerName("jonty")

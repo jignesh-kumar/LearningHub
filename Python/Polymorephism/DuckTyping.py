@@ -1,7 +1,7 @@
-
 class Duck:
     def talk(self):
         print("Quack Quack")
+
 
 class Human:
     def talk(self):
@@ -10,6 +10,7 @@ class Human:
 
 def CallTalk(obj):
     obj.talk()
+
 
 dobj = Duck()
 CallTalk(dobj)
