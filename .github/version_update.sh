@@ -14,7 +14,6 @@ get_latest_tag() {
     echo "$latest_tag"
 }
 
-
 # Function to read the current version from the latest tag
 read_current_version() {
   latest_tag=$(get_latest_tag)
@@ -58,6 +57,7 @@ echo "current_version: ${current_version}"
 # Determine the version type from the PR description (default to "Patch")
 version_type="Patch"
 pr_description=$($GIT_CMD log -1 --pretty=%B)
+
 if [[ "$pr_description" == *"[Major]"* ]]; then
   version_type="Major"
 elif [[ "$pr_description" == *"[Minor]"* ]]; then
