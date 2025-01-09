@@ -15,6 +15,10 @@ jobs:
         with:
           fetch-depth: 0  # Fetch all history for all branches and tags
           tags: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
           python-version: '3.x'
 
       - name: Set up Git user
