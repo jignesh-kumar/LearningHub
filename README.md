@@ -1,4 +1,5 @@
 [![Contributors][contributors-shield]][contributors-url]
+[![Pull Requests][pull-requests-shield]][pull-requests-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stargazers-shield]][stargazers-url]
 [![Issues][issues-shield]][issues-url]
@@ -7,6 +8,8 @@
 
 [contributors-shield]: https://img.shields.io/github/contributors/jignesh-kumar/LearningHub.svg?style=for-the-badge
 [contributors-url]: https://github.com/jignesh-kumar/LearningHub/graphs/contributors
+[pull-requests-shield]: https://img.shields.io/github/issues-pr/jignesh-kumar/LearningHub.svg?style=for-the-badge
+[pull-requests-url]: https://github.com/jignesh-kumar/LearningHub/pulls
 [forks-shield]: https://img.shields.io/github/forks/jignesh-kumar/LearningHub.svg?style=for-the-badge
 [forks-url]: https://github.com/jignesh-kumar/LearningHub/network/members
 [stargazers-shield]: https://img.shields.io/github/stars/jignesh-kumar/LearningHub.svg?style=for-the-badge
