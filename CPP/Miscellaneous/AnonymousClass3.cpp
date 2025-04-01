@@ -13,7 +13,18 @@ This approach helps in controlling the scope of the objects, which are confined 
 using namespace std;
 
 // Anonymous Class : Class is not having any name
+#ifdef _MSC_VER  // Microsoft Visual Studio Compiler
+// In MSVC, anonymous classes are not supported
+// So, we need to use a named class
+// to create an object of the class
+// The class name is not required to be used
+// in the program, but it is required to create an object
+// So, we can use typedef to give a name to the class
+// and use it to create an object
+class myClass
+#else
 typedef class
+#endif
 {
     // data member
     int i;
@@ -30,7 +41,11 @@ public:
     {
         cout << "Value for i : " << this->i << endl;
     }
+#ifdef _MSC_VER
+};
+#else
 } myClass; // using typedef to give a proper name
+#endif
 
 // Driver function
 int main()

@@ -1,17 +1,20 @@
 import os
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
-from conan.tools.build import can_run
-
+import subprocess
+import sys
 
 def get_latest_tag():
     try:
-        # Get the latest tag using os.popen and os.system
-        latest_tag = (
-            os.popen("git describe --tags `git rev-list --tags --max-count=1`")
-            .read()
-            .strip()
-        )
+        # Determine the appropriate command based on the platform
+        if sys.platform.startswith('win'):
+            command = 'git describe --tags $(git rev-list --tags --max-count=1)'
+        else:  # For Linux and others
+            command = 'git describe --tags `git rev-list --tags --max-count=1`'
+
+        # Execute the command using subprocess
+        result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        latest_tag = result.stdout.decode().strip()
         if not latest_tag:
             return "1.0.0"  # Fallback version if no tags are found
         return latest_tag
@@ -21,8 +24,17 @@ def get_latest_tag():
 
 class AstragaramLibs(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    name = "LearningHub"
+    name = "learning-hub"
+    url = "https://github.com/jignesh-kumar/LearningHub"
     version = get_latest_tag()
+    scm = {
+        "type": "git",
+        "url": "git@github.com:jignesh-kumar/LearningHub.git",
+        "revision": "auto"
+    }
+
+    # Sources are located in the same place as this recipe, copy them to the recipe
+    exports_sources = "CMakeLists.txt", "*"
 
     def build_requirements(self):
         self.tool_requires("cmake/3.30.5")
@@ -49,7 +61,6 @@ class AstragaramLibs(ConanFile):
 
     def which(self, program):
         import shutil
-
         return shutil.which(program)
 
     def build(self):
