@@ -1,4 +1,4 @@
-name: CI | Create a Conan package test for astragaram-libs on Linux
+name: CI | Create a Conan package test for LearningHub on Linux
 
 on:
   push:
@@ -20,6 +20,6 @@ jobs:
         pip install conan==2.11.0
         conan profile detect
 
-    - name: Create a Conan package for astragaram-libs
+    - name: Create a Conan package for LearningHub
       run: |
         conan create . --build=missing -u

@@ -1,4 +1,4 @@
-name: CI | Create a Conan package test for astragaram-libs on Windows
+name: CI | Create a Conan package test for LearningHub on Windows
 
 on:
   push:
@@ -29,6 +29,6 @@ jobs:
       run: |
         conan profile detect
 
-    - name: Create a Conan package for astragaram-libs
+    - name: Create a Conan package for LearningHub
       run: |
         conan create . --build=missing -u
