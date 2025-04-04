@@ -22,7 +22,7 @@ def get_latest_tag():
         return "1.0.0"  # Fallback version in case of an error
 
 
-class AstragaramLibs(ConanFile):
+class LearningHub(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     name = "learning-hub"
     url = "https://github.com/jignesh-kumar/LearningHub"
