@@ -41,3 +41,12 @@ This repo is for the Learning purpose
 
 #### Following step to Create Conan Package
 > - conan create . --build=missing -u
+
+#
+# CPP
+1.  [FunctionPointer](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/FunctionPointer)
+2.  [InitializerList](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/InitializerList)
+3.  [LocalClasses](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/LocalClasses)
+
+# STL in CPP
+1.  [STL EmplaceBack](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/STL/EmplaceBack)
