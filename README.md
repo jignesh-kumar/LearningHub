@@ -49,6 +49,9 @@ This repo is for the Learning purpose
 3.  [LocalClasses](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/LocalClasses)
 4.  [Preventing Address Access of an Object in C++](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/Miscellaneous/PreventingAddressAccessOfAnObjectInCpp/README.md)
 5.  [How to Check if Two Different Objects Belong to the Same Class in C++?](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/Miscellaneous/TypeId/README.md)
+6.  [C++ Compilation Process](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/Miscellaneous/CppCompilation/CppCompilationProcess.md)<br>
+    6.1. [Compilation Errors](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/Miscellaneous/CppCompilation/CompilationErrors.md)<br>
+    6.2. [Debugging C++ Compilation Errors](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/Miscellaneous/CppCompilation/DebuggingCompilationErrors.md)<br>
 
 # STL in CPP
 1.  [STL EmplaceBack](https://github.com/jignesh-kumar/LearningHub/tree/main/CPP/STL/EmplaceBack/README.md)
