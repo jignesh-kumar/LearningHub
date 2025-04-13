@@ -4,7 +4,7 @@ message(LL_INFO " Cmake Version : " ${CMAKE_VERSION})
 project(LearningHub LANGUAGES CXX)
 
 # Enable debugging information
-# set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Debug)
 
 # Function to process subdirectories recursively
 function(add_all_subdirectories dir)
