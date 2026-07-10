@@ -27,19 +27,21 @@ jobs:
         conan --version
         where conan || where conan.exe || echo "conan not found on PATH"
 
-    - name: Setup Conan profile for Windows
+    - name: Detect Conan profile
       run: |
         conan profile detect --force
-        conan profile update settings.compiler=msvc default
-        conan profile update settings.compiler.version=193 default
-        conan profile update settings.compiler.runtime=dynamic default
-        conan profile update settings.compiler.runtime_type=Release default
-        conan profile update settings.compiler.cppstd=14 default
         conan profile show default
 
     - name: Install the requirements specified in a Conan recipe
       run: |
-        conan install . -of buildwindows --build missing -u
+        conan install . -of buildwindows --build missing -u \
+          -s compiler=msvc \
+          -s compiler.version=193 \
+          -s compiler.runtime=dynamic \
+          -s compiler.runtime_type=Release \
+          -s compiler.cppstd=14 \
+          -s os=Windows \
+          -s build_type=Release
     
     - name: Build using Conan
       run: |
