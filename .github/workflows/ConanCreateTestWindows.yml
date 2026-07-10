@@ -24,11 +24,13 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install conan==2.11.0
+        conan --version
+        where conan || where conan.exe || echo "conan not found on PATH"
       
     - name: Detect Conan profile
       run: |
-        python -m conan profile detect
+        conan profile detect --force
 
     - name: Create a Conan package for LearningHub
       run: |
-        python -m conan create . --build=missing -u
+        conan create . --build=missing -u

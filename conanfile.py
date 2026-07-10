@@ -6,20 +6,26 @@ import sys
 
 def get_latest_tag():
     try:
-        # Determine the appropriate command based on the platform
-        if sys.platform.startswith('win'):
-            command = 'git describe --tags $(git rev-list --tags --max-count=1)'
-        else:  # For Linux and others
-            command = 'git describe --tags `git rev-list --tags --max-count=1`'
+        rev_list = subprocess.run(
+            ["git", "rev-list", "--tags", "--max-count=1"],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        revision = rev_list.stdout.decode().strip()
+        if not revision:
+            return "1.0.0"
 
-        # Execute the command using subprocess
-        result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        latest_tag = result.stdout.decode().strip()
-        if not latest_tag:
-            return "1.0.0"  # Fallback version if no tags are found
-        return latest_tag
-    except Exception as e:
-        return "1.0.0"  # Fallback version in case of an error
+        describe = subprocess.run(
+            ["git", "describe", "--tags", revision],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        latest_tag = describe.stdout.decode().strip()
+        return latest_tag or "1.0.0"
+    except Exception:
+        return "1.0.0"
 
 
 class LearningHub(ConanFile):

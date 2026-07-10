@@ -24,15 +24,17 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install conan==2.11.0
+        conan --version
+        where conan || where conan.exe || echo "conan not found on PATH"
 
     - name: Detect Conan profile
       run: |
-        python -m conan profile detect
+        conan profile detect --force
 
     - name: Install the requirements specified in a Conan recipe
       run: |
-        python -m conan install . -of buildwindows --build missing -u
+        conan install . -of buildwindows --build missing -u
     
     - name: Build using Conan
       run: |
-        python -m conan build . -of buildwindows
+        conan build . -of buildwindows
