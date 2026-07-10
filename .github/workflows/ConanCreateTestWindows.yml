@@ -27,11 +27,6 @@ jobs:
         conan --version
         where conan || where conan.exe || echo "conan not found on PATH"
       
-    - name: Detect Conan profile
-      run: |
-        conan profile detect --force
-        conan profile show default
-
     - name: Create a Conan package for LearningHub
       run: |
         conan create . --build=missing -u \

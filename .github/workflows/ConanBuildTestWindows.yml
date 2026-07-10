@@ -27,11 +27,6 @@ jobs:
         conan --version
         where conan || where conan.exe || echo "conan not found on PATH"
 
-    - name: Detect Conan profile
-      run: |
-        conan profile detect --force
-        conan profile show default
-
     - name: Install the requirements specified in a Conan recipe
       run: |
         conan install . -of buildwindows --build missing -u \
