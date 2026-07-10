@@ -47,17 +47,29 @@ class LearningHub(ConanFile):
 
     def run_astyle(self):
         astyle_path = self.which("astyle")
-        if astyle_path:
-            self.output.info("Running astyle to format source files")
-            os.chdir(self.source_folder)  # Folder change to Source
-            os.system(
-                'find . -name "*.cpp" -o -name "*.h" | xargs astyle --style=linux --suffix=none --indent=spaces=4 --add-brackets'
-            )
-            os.chdir(self.build_folder)  # Change back to build folder
-        else:
+        if not astyle_path:
             self.output.info(
                 "astyle is not installed. Skipping code formatting. Suggesting to install astyle: sudo apt-get install -y astyle"
             )
+            return
+
+        self.output.info("Running astyle to format source files")
+        for root, _, files in os.walk(self.source_folder):
+            for filename in files:
+                if filename.endswith((".cpp", ".h")):
+                    file_path = os.path.join(root, filename)
+                    self.output.info(f"Formatting {file_path}")
+                    subprocess.run(
+                        [
+                            astyle_path,
+                            "--style=linux",
+                            "--suffix=none",
+                            "--indent=spaces=4",
+                            "--add-brackets",
+                            file_path,
+                        ],
+                        check=False,
+                    )
 
     def which(self, program):
         import shutil
