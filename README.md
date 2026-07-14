@@ -23,9 +23,21 @@
 
 
 # LearningHub
-This repo is for the Learning purpose
 
-### Build this application using conan 2
+LearningHub is a personal learning repository for C++ and Python concepts. It is organized for hands-on practice, quick revision, and interview preparation.
+
+## What this repo is for
+- Learn core programming concepts with small examples
+- Revise topics quickly before interviews or exams
+- Build confidence by running and modifying code examples
+
+## Suggested learning flow
+1. Start with the roadmap in [LEARNING_ROADMAP.md](LEARNING_ROADMAP.md)
+2. Use the topic template in [docs/TOPIC_TEMPLATE.md](docs/TOPIC_TEMPLATE.md)
+3. Practice with the questions in [docs/PRACTICE_QUESTIONS.md](docs/PRACTICE_QUESTIONS.md)
+4. Explore the language-specific notes in [CPP/README.md](CPP/README.md) and [Python/README.md](Python/README.md)
+
+## Build this application using conan 2
 
 #### First install conan in your linux development machine
 > - sudo apt-get update

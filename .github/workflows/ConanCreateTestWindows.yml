@@ -8,27 +8,31 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022 # Changed from windows-latest to guarantee Visual Studio 2022 is present
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5  # Changed from v4 to v5 to resolve Node.js deprecation warnings
       with:
         python-version: '3.x'
 
     - name: Install Conan
       run: |
         python -m pip install --upgrade pip
-        pip install conan==2.11.0
+        python -m pip install --upgrade conan  # Removed hardcoded 2.11.0 to ensure the latest compiler settings are recognized
+        conan --version
+        where conan || where conan.exe || echo "conan not found on PATH"
       
     - name: Detect Conan profile
-      run: |
-        conan profile detect
+      run: conan profile detect --force
 
     - name: Create a Conan package for LearningHub
-      run: |
-        conan create . --build=missing -u
+      # Added :h (host) and :b (build) context flags to strictly enforce MSVC and bypass auto-detected GCC/Clang
+      run: conan create . --build=missing -u -s:h compiler=msvc -s:h compiler.version=193 -s:h compiler.runtime=dynamic -s:h compiler.runtime_type=Release -s:h compiler.cppstd=14 -s:h os=Windows -s:h build_type=Release -s:b compiler=msvc -s:b compiler.version=193

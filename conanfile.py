@@ -6,20 +6,26 @@ import sys
 
 def get_latest_tag():
     try:
-        # Determine the appropriate command based on the platform
-        if sys.platform.startswith('win'):
-            command = 'git describe --tags $(git rev-list --tags --max-count=1)'
-        else:  # For Linux and others
-            command = 'git describe --tags `git rev-list --tags --max-count=1`'
+        rev_list = subprocess.run(
+            ["git", "rev-list", "--tags", "--max-count=1"],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        revision = rev_list.stdout.decode().strip()
+        if not revision:
+            return "1.0.0"
 
-        # Execute the command using subprocess
-        result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        latest_tag = result.stdout.decode().strip()
-        if not latest_tag:
-            return "1.0.0"  # Fallback version if no tags are found
-        return latest_tag
-    except Exception as e:
-        return "1.0.0"  # Fallback version in case of an error
+        describe = subprocess.run(
+            ["git", "describe", "--tags", revision],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        latest_tag = describe.stdout.decode().strip()
+        return latest_tag or "1.0.0"
+    except Exception:
+        return "1.0.0"
 
 
 class LearningHub(ConanFile):
@@ -47,17 +53,29 @@ class LearningHub(ConanFile):
 
     def run_astyle(self):
         astyle_path = self.which("astyle")
-        if astyle_path:
-            self.output.info("Running astyle to format source files")
-            os.chdir(self.source_folder)  # Folder change to Source
-            os.system(
-                'find . -name "*.cpp" -o -name "*.h" | xargs astyle --style=linux --suffix=none --indent=spaces=4 --add-brackets'
-            )
-            os.chdir(self.build_folder)  # Change back to build folder
-        else:
+        if not astyle_path:
             self.output.info(
                 "astyle is not installed. Skipping code formatting. Suggesting to install astyle: sudo apt-get install -y astyle"
             )
+            return
+
+        self.output.info("Running astyle to format source files")
+        for root, _, files in os.walk(self.source_folder):
+            for filename in files:
+                if filename.endswith((".cpp", ".h")):
+                    file_path = os.path.join(root, filename)
+                    self.output.info(f"Formatting {file_path}")
+                    subprocess.run(
+                        [
+                            astyle_path,
+                            "--style=linux",
+                            "--suffix=none",
+                            "--indent=spaces=4",
+                            "--add-brackets",
+                            file_path,
+                        ],
+                        check=False,
+                    )
 
     def which(self, program):
         import shutil
