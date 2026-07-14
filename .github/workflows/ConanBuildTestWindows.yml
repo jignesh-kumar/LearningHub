@@ -28,10 +28,10 @@ jobs:
         where conan || where conan.exe || echo "conan not found on PATH"
 
     - name: Detect Conan profile
-      run: conan profile detect --force
+      run: python -m conan profile detect --force
 
     - name: Install the requirements specified in a Conan recipe
-      run: conan install . -of buildwindows --build missing -u -s compiler=msvc -s compiler.version=193 -s compiler.runtime=dynamic -s compiler.runtime_type=Release -s compiler.cppstd=14 -s os=Windows -s build_type=Release
+      run: python -m conan install . -of buildwindows --build missing -u -s compiler=msvc -s compiler.version=193 -s compiler.runtime=dynamic -s compiler.runtime_type=Release -s compiler.cppstd=14 -s os=Windows -s build_type=Release
     
     - name: Build using Conan
       run: |
