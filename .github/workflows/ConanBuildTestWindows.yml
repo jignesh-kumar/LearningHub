@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022 # Changed from windows-latest to guarantee Visual Studio 2022 is present
 
     steps:
     - uses: actions/checkout@v4
