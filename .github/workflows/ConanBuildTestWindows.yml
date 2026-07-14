@@ -16,23 +16,22 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5 # Upgraded to v5 to fix Node 20 deprecation warnings
       with:
         python-version: '3.x'
     
     - name: Install Conan
       run: |
         python -m pip install --upgrade pip
-        python -m pip install conan==2.11.0
+        python -m pip install --upgrade conan # Upgraded to ensure latest compiler support
         conan --version
         where conan || where conan.exe || echo "conan not found on PATH"
 
     - name: Detect Conan profile
-      run: python -m conan profile detect --force
+      run: conan profile detect --force 
 
     - name: Install the requirements specified in a Conan recipe
-      run: python -m conan install . -of buildwindows --build missing -u -s compiler=msvc -s compiler.version=193 -s compiler.runtime=dynamic -s compiler.runtime_type=Release -s compiler.cppstd=14 -s os=Windows -s build_type=Release
+      run: conan install . -of buildwindows --build missing -u -s:h compiler=msvc -s:h compiler.version=193 -s:h compiler.runtime=dynamic -s:h compiler.runtime_type=Release -s:h compiler.cppstd=14 -s:h os=Windows -s:h build_type=Release -s:b compiler=msvc -s:b compiler.version=193
     
     - name: Build using Conan
-      run: |
-        conan build . -of buildwindows
+      run: conan build . -of buildwindows
